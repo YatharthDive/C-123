@@ -1,3 +1,7 @@
+nose_x=0; nose_y=0;
+difference=0;
+right_wrist_x=0;
+left_wrist_x=0;
 function setup() {
     canvas = createCanvas(550, 500);
     canvas.position(600, 90)
@@ -9,6 +13,11 @@ function setup() {
 
 function gotposes(results) {
     if (results.length > 0) {
+        nose_x=results[0].pose.nose.x;
+        nose_y=results[0].pose.nose.y;
+        right_wrist_x=results[0].pose.rightWrist.x;
+        left_wrist_x=results[0].pose.leftWrist.x;
+        difference=floor(left_wrist_x-right_wrist_x)
         console.log(results);
     }
 }
@@ -18,9 +27,10 @@ function modelLoaded() {
 }
 
 function draw() {
+    background("black")
     fill("red");
-    textSize(20);
+    textSize(difference);
     console.log("Yatharth");
-    text("Yatharth",200,200)
+    text("Yatharth",nose_x,nose_y)
 }
 
